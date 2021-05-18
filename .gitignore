@@ -1,0 +1,11 @@
+bertenv/
+.bertenv/
+
+.DS_Store
+
+src/others/__pycache__/
+src/prepro/__pycache__/
+
+vocab.korean_morp.list
+
+summary_data/

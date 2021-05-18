@@ -28,10 +28,10 @@ class Batch(object):
 
             labels = torch.tensor(self._pad(pre_labels, 0))
             segs = torch.tensor(self._pad(pre_segs, 0))
-            mask = 1 - (src == 0)
+            mask = ~(src == 0)
 
             clss = torch.tensor(self._pad(pre_clss, -1))
-            mask_cls = 1 - (clss == -1)
+            mask_cls = ~(clss == -1)
             clss[clss == -1] = 0
 
             setattr(self, 'clss', clss.to(device))
@@ -42,9 +42,9 @@ class Batch(object):
             setattr(self, 'mask', mask.to(device))
 
             if (is_test):
-                src_str = [x[-2] for x in data]
+                src_str = [x[4] for x in data]
                 setattr(self, 'src_str', src_str)
-                tgt_str = [x[-1] for x in data]
+                tgt_str = [x[5] for x in data]
                 setattr(self, 'tgt_str', tgt_str)
 
     def __len__(self):
